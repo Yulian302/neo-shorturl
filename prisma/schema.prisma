@@ -1,0 +1,26 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+type CountersId {
+    coll String
+    db   String
+}
+
+model counters {
+    id        CountersId @id @map("_id")
+    seq_value BigInt
+}
+
+model urls {
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    id_         BigInt   @map("id")
+    originalUrl String
+    shortUrl    String
+    createdAt   DateTime @default(now())
+}
